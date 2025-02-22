@@ -8,7 +8,7 @@ import VirtualCard from "./pages/VirtualCard";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<DynamicShoppingList />} />
+      <Route path="/" element={<BNPLRankings />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/cart" element={<DynamicShoppingList />} />
       <Route path="/bnpl" element={<BNPLRankings />} />

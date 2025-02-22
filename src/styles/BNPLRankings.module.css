@@ -1,0 +1,179 @@
+/* Container and overall layout */
+.container {
+    width: 100%;
+    padding: 0.5rem;
+    /* Reduced padding */
+    background-color: #f3f4f6;
+    /* Light Gray */
+    border-radius: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    /* Consistent font */
+}
+
+.heading {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1e3a8a;
+    /* Deep Navy Blue */
+    text-align: center;
+    margin-bottom: 0.5rem;
+    /* Reduced margin */
+}
+
+/* Ranking container and cards */
+.rankingContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* Reduced gap for more compact layout */
+}
+
+.providerCard {
+    padding: 0.5rem;
+    /* Smaller padding */
+    border-radius: 0.375rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d1d5db;
+    /* Light Border */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.providerCard:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Ranking Colors (Gold, Silver, Bronze) */
+.rank1 {
+    border-left: 5px solid #ffd700;
+    /* Gold */
+    background-color: #fff8e1;
+    /* Light Yellow */
+    
+    /* Strong shadow */
+    font-weight: bold;
+    /* Make text bold for Rank 1 */
+    /* Slightly larger for Rank 1 */
+}
+
+.rank2 {
+    border-left: 5px solid #c0c0c0;
+    /* Silver */
+    transform: scale(0.90);
+    /* Slightly smaller for Rank 2 */
+}
+
+.rank3 {
+    border-left: 5px solid #cd7f32;
+    /* Bronze */
+    transform: scale(0.90);
+    /* Slightly smaller for Rank 3 */
+}
+
+/* Provider Name */
+.providerName {
+    font-size: 1.1rem;
+    /* Smaller size for provider name */
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-bottom: 0.5rem;
+}
+
+/* Provider Summary */
+.providerSummary {
+    font-size: 0.9rem;
+    /* Smaller summary text */
+    color: #374151;
+    /* Dark Gray */
+    margin-bottom: 0.75rem;
+}
+
+/* Button for more info */
+.moreInfoButton {
+    background: none;
+    border: none;
+    color: #14b8a6;
+    /* Electric Teal */
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.moreInfoButton:hover {
+    color: #0f766e;
+    /* Darker Teal */
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popupContent {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.375rem;
+    width: 80%;
+    max-width: 400px;
+    /* Reduced width for compact design */
+    text-align: center;
+}
+
+.closePopupButton {
+    background-color: #14b8a6;
+    /* Electric Teal */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.closePopupButton:hover {
+    background-color: #0f766e;
+    /* Darker Teal */
+}
+.selected {
+    border: 2px solid #14b8a6;
+    /* Electric Teal for selected state */
+    box-shadow: 0 4px 8px rgba(20, 184, 166, 0.2);
+    /* Subtle shadow for emphasis */
+}
+
+.getCardDetailsButton {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #1e3a8a;
+    color: white;
+    border-radius: 0.375rem;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 0.75rem;
+}
+
+.getCardDetailsButton:hover {
+    background-color: #14234b;
+    /* Darker Navy */
+}
+
+.getCardDetailsButton:disabled {
+    background-color: #d1d5db;
+    /* Light Grey */
+    color: #9ca3af;
+    /* Darker Grey for text */
+    cursor: not-allowed;
+}

@@ -3,65 +3,72 @@ import { FaGift, FaCheckCircle } from "react-icons/fa";
 import styles from "../styles/RewardsPage.module.css";
 
 interface Reward {
-  id: number;
-  name: string;
-  date: string;
+  reward_name: string;
+  reward_amount: number;
+  redeemed_at: string; // Using ISO string for timestamp
   status: "Redeemed" | "Pending";
 }
 
-// Hardcoded redeemed rewards data
-const hardcodedRewards: Reward[] = [
-  {
-    id: 1,
-    name: "Starbucks Gift Card",
-    date: "2025-02-20",
-    status: "Redeemed",
-  },
-  { id: 2, name: "Amazon Voucher $10", date: "2025-02-18", status: "Redeemed" },
-  {
-    id: 3,
-    name: "Sports Direct Gift Card",
-    date: "2025-02-15",
-    status: "Redeemed",
-  },
-  {
-    id: 4,
-    name: "One4All €25 Gift Card",
-    date: "2025-02-10",
-    status: "Pending",
-  },
-];
-
 const RewardsPage = () => {
   const [rewards, setRewards] = useState<Reward[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    // Load redemption history from local storage
-    const savedRewards = localStorage.getItem("redeemedRewards");
-    if (savedRewards) {
-      setRewards(JSON.parse(savedRewards));
-    } else {
-      // If no saved rewards, use the hardcoded ones
-      setRewards(hardcodedRewards);
-    }
+    const fetchRewards = async () => {
+      try {
+        const userId = 5;
+        const response = await fetch(
+          `http://localhost:8000/rewards/${userId}/redeemed-rewards`
+        );
+
+        console.log(response);
+        if (!response.ok) {
+          throw new Error("Failed to fetch rewards data");
+        }
+
+        const data = await response.json();
+
+        // Format the date if necessary (e.g., from ISO string to date format)
+        const formattedRewards = data.map((reward: any) => ({
+          ...reward,
+          redeemed_at: new Date(reward.redeemed_at).toLocaleDateString("en-US"), // Convert timestamp to readable date
+          status: "Redeemed", // You can adjust this as needed based on your backend data
+        }));
+
+        setRewards(formattedRewards);
+      } catch (err: any) {
+        setError(err.message || "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRewards();
   }, []);
 
   return (
     <div className={styles.rewardsContainer}>
       <h2 className={styles.title}>Your Rewards History</h2>
 
-      {rewards.length === 0 ? (
+      {loading ? (
+        <p className={styles.loading}>Loading rewards...</p>
+      ) : error ? (
+        <p className={styles.error}>{error}</p>
+      ) : rewards.length === 0 ? (
         <p className={styles.noRewards}>No rewards redeemed yet.</p>
       ) : (
         <div className={styles.rewardsList}>
-          {rewards.map((reward) => (
-            <div key={reward.id} className={styles.rewardCard}>
+          {rewards.map((reward, index) => (
+            <div key={index} className={styles.rewardCard}>
               <div className={styles.rewardIcon}>
                 <FaGift />
               </div>
               <div className={styles.rewardDetails}>
-                <h3 className={styles.rewardName}>{reward.name}</h3>
-                <p className={styles.rewardDate}>Redeemed on: {reward.date}</p>
+                <h3 className={styles.rewardName}>{reward.reward_name}</h3>
+                <p className={styles.rewardDate}>
+                  Redeemed on: {reward.redeemed_at}
+                </p>
               </div>
               <div
                 className={`${styles.rewardStatus} ${

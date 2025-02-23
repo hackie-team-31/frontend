@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import styles from "../styles/DisposableCard.module.css";
-import { FaCopy } from "react-icons/fa"; // Importing the copy icon
+import { FaCopy } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 const DisposableCard: React.FC = () => {
+  const location = useLocation();
   const [showCardDetails, setShowCardDetails] = useState(false);
-
-  const cardDetails = {
-    number: "1234 5678 9876 5432", // Replace with actual Stripe-generated card number
-    cvv: "123",
-    expiry: "12/25",
-  };
+  const { cardDetails } = location.state || {};
 
   const toggleCardDetails = () => setShowCardDetails(!showCardDetails);
 
@@ -33,15 +30,15 @@ const DisposableCard: React.FC = () => {
         </div>
         <div className={styles.cardNumber}>
           {showCardDetails
-            ? cardDetails.number
-            : maskCardNumber(cardDetails.number)}
+            ? cardDetails.card_number
+            : maskCardNumber(cardDetails.card_number)}
           <FaCopy
-            onClick={() => copyToClipboard(cardDetails.number)}
+            onClick={() => copyToClipboard(cardDetails.card_number)}
             className={styles.copyIcon}
           />
         </div>
         <div className={styles.cardFooter}>
-          <div className={styles.cardExpiry}>Exp: {cardDetails.expiry}</div>
+          <div className={styles.cardExpiry}>Exp: {cardDetails.exp_date}</div>
           <div className={styles.cardCvv}>
             {showCardDetails ? cardDetails.cvv : "***"}
             <FaCopy

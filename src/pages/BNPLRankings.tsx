@@ -40,10 +40,41 @@ const BNPLRanking = () => {
   const handleMoreInfo = (fullExplanation: string) => {
     setProviderDetails(fullExplanation); // Show details when More Info is clicked
   };
-
-  const handleGetCardDetails = () => {
+  const handleGetCardDetails = async () => {
     if (selectedProvider !== null) {
-      navigate(`/pay/${selectedProvider}`);
+      try {
+        const payload = {
+          cardholder_id: "user_123",
+          purchase_amount: 1000, // Example: $10.00
+          currency: "usd",
+          merchant_id: "merch_456",
+          allowed_categories: ["merchandise"],
+          blocked_categories: ["gambling"],
+          expiration_seconds: 3600
+        };
+
+        const response = await fetch("http://localhost:8000/cards", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to create card.");
+        }
+
+        const cardDetails = await response.json();
+        console.log("Card Details:", cardDetails);
+
+        navigate(`/card`, { state: { cardDetails } });
+
+      } catch (error) {
+
+        console.error("Error fetching card details:", error);
+        alert("Failed to get card details. Please try again.");
+      }
     }
   };
 
@@ -54,15 +85,13 @@ const BNPLRanking = () => {
         {providers.map((provider, index) => (
           <div
             key={provider.id}
-            className={`${styles.providerCard} ${
-              selectedProvider === provider.id ? styles.selected : ""
-            } ${
-              index === 0
+            className={`${styles.providerCard} ${selectedProvider === provider.id ? styles.selected : ""
+              } ${index === 0
                 ? styles.rank1
                 : index === 1
-                ? styles.rank2
-                : styles.rank3
-            }`}
+                  ? styles.rank2
+                  : styles.rank3
+              }`}
           >
             <input
               type="radio"

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "../styles/BNPLRankings.module.css";
+import { useNavigate } from "react-router-dom";
 
 const BNPLRanking = () => {
   const [selectedProvider, setSelectedProvider] = useState<number | null>(null);
   const [providerDetails, setProviderDetails] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const providers = [
     {
@@ -41,11 +43,7 @@ const BNPLRanking = () => {
 
   const handleGetCardDetails = () => {
     if (selectedProvider !== null) {
-      alert(
-        `Proceeding with the selected BNPL provider: ${
-          providers[selectedProvider - 1].name
-        }`
-      );
+      navigate("/pay");
     }
   };
 

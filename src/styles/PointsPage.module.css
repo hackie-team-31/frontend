@@ -1,0 +1,120 @@
+* {
+    font-family: "Inter", sans-serif;
+}
+
+.rewardContainer {
+    padding: 1rem;
+    background-color: #ecf0f1;
+    /* Light Gray */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.points {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #34495e;
+    /* Charcoal Gray */
+}
+
+.rewardsList {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.rewardItem {
+    background: #ffffff;
+    /* White */
+    border-radius: 0.75rem;
+    color: #34495e;
+    /* Charcoal Gray */
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #1abc9c;
+    /* Electric Teal */
+}
+
+.rewardName {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.rewardCost {
+    font-size: 0.875rem;
+}
+
+.redeemButton {
+    background-color: #f1c40f;
+    /* Vibrant Gold */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.redeemButton:hover {
+    background-color: #e67e22;
+    /* Darker Gold */
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popupContent {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.375rem;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.successMessage {
+    font-size: 1.25rem;
+    color: #1abc9c;
+    /* Electric Teal */
+    margin-bottom: 1rem;
+}
+
+.confettiAnimation {
+    /* Remove background image */
+    font-size: 2rem;
+    margin-top: 1rem;
+}
+
+.closePopupButton {
+    background-color: #1abc9c;
+    /* Electric Teal */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.closePopupButton:hover {
+    background-color: #16a085;
+    /* Darker Electric Teal */
+}

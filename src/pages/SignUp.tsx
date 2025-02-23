@@ -234,7 +234,7 @@ const SignUp: React.FC = () => {
           />
         </div>
 
-        <Link to="/" className={styles.link}>
+        <Link to="/cart" className={styles.link}>
           Already have an account? Login here
         </Link>
 

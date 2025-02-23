@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "../styles/DynamicShoppingList.module.css";
+import { Link } from "react-router-dom";
 
 const DynamicShoppingList: React.FC = () => {
   const [item, setItem] = useState({ name: "", price: "", quantity: "" });
@@ -103,9 +104,11 @@ const DynamicShoppingList: React.FC = () => {
 
       <h3 className={styles.total}>Total: ${totalCost.toFixed(2)}</h3>
 
-      <button onClick={handleCheckout} className={styles.checkoutButton}>
-        ✅ Proceed to BNPL Analyzer
-      </button>
+      <Link to="/bnpl">
+        <button onClick={handleCheckout} className={styles.checkoutButton}>
+          🚀 Proceed to BNPL Analyzer
+        </button>
+      </Link>
     </div>
   );
 };

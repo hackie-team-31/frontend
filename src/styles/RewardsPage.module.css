@@ -1,0 +1,94 @@
+* {
+    font-family: "Inter", sans-serif;
+}
+.rewardsContainer {
+    background-color: #ECF0F1;
+    /* Light Gray background */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    color: #2C3E50;
+    /* Deep Navy Blue */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.noRewards {
+    color: #34495E;
+    /* Charcoal Gray */
+    text-align: center;
+    font-size: 18px;
+}
+
+.rewardsList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.rewardCard {
+    background-color: #FFFFFF;
+    /* White for contrast */
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.rewardCard:hover {
+    transform: scale(1.02);
+}
+
+.rewardIcon {
+    font-size: 24px;
+    color: #1ABC9C;
+    /* Electric Teal */
+}
+
+.rewardDetails {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.rewardName {
+    color: #2C3E50;
+    /* Deep Navy Blue */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.rewardDate {
+    color: #34495E;
+    /* Charcoal Gray */
+    font-size: 14px;
+}
+
+.rewardStatus {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.redeemed {
+    background-color: #F1C40F;
+    /* Vibrant Gold */
+    color: #2C3E50;
+    /* Deep Navy Blue for contrast */
+}
+
+.pending {
+    background-color: #CD7F32;
+    /* Bronze */
+    color: #FFFFFF;
+}

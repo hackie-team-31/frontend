@@ -19,7 +19,7 @@ function App() {
         <Route path="/cart" element={<DynamicShoppingList />} />
         <Route path="/bnpl" element={<BNPLRankings />} />
         <Route path="/card" element={<DisposableCard />} />
-        <Route path="/pay" element={<StripePayment />} />
+        <Route path="/pay/:providerId" element={<StripePayment />} />
         <Route path="/points" element={<PointsPage />} />
         <Route path="/rewards" element={<RewardsPage />} />{" "}
         {/* Add this route */}

@@ -43,7 +43,7 @@ const BNPLRanking = () => {
 
   const handleGetCardDetails = () => {
     if (selectedProvider !== null) {
-      navigate("/pay");
+      navigate(`/pay/${selectedProvider}`);
     }
   };
 

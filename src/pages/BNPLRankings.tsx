@@ -1,44 +1,76 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/BNPLRankings.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
+interface Provider {
+  id: number;
+  name: string;
+  highlightSummary: string;
+  fullDescription: string;
+}
 
 const BNPLRanking = () => {
+  const [providers, setProviders] = useState<Provider[]>([]);
   const [selectedProvider, setSelectedProvider] = useState<number | null>(null);
   const [providerDetails, setProviderDetails] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const providers = [
-    {
-      id: 1,
-      name: "Klarna",
-      summary:
-        "Top for ease of use and wide retailer support - 80% customer satisfaction rate",
-      fullExplanation:
-        "Klarna offers one of the largest networks of supported retailers, and its customer satisfaction rate is among the highest in the industry.",
-    },
-    {
-      id: 2,
-      name: "AfterPay",
-      summary: "Best for flexible payment options - 75% user approval rate",
-      fullExplanation:
-        "AfterPay gives users the flexibility of splitting payments into 4 easy installments, and it is known for quick and transparent approval processes.",
-    },
-    {
-      id: 3,
-      name: "Sezzle",
-      summary: "Top for interest-free payments - 72% customer loyalty",
-      fullExplanation:
-        "Sezzle offers interest-free payment plans and is known for its excellent customer service and flexible repayment terms.",
-    },
-  ];
+  // Retrieve the totalCost passed via the Link state
+  const location = useLocation();
+  const totalCost = location.state?.totalCost; // Using optional chaining in case the state is not available
+
+  // Function to format AI suggestions
+  const formatAiSuggestions = (ai_suggestion: string): Provider[] => {
+    const formattedProviders: Provider[] = [];
+    const regex = /(\d+)\.\s\*\*(.*?)\*\*\s*;\s*(.*?);/g;
+    let match;
+    let id = 1;
+
+    while ((match = regex.exec(ai_suggestion)) !== null) {
+      const name = match[2];
+      const highlightSummary = match[3].split(";")[0];
+      const fullDescription = match[3].split(";").slice(1).join(";");
+
+      formattedProviders.push({
+        id: id++,
+        name,
+        highlightSummary,
+        fullDescription,
+      });
+    }
+
+    return formattedProviders;
+  };
+
+  useEffect(() => {
+    if (totalCost === undefined) {
+      // Handle the case where totalCost is not passed
+      console.error("Total cost is missing!");
+      return;
+    }
+
+    const fetchData = async () => {
+      const response = await fetch(
+        `http://localhost:8000/profile/5?product_price=${totalCost}`
+      );
+      const data = await response.json();
+
+      // Process AI suggestions into a structured format
+      const formattedProviders = formatAiSuggestions(data.ai_suggestion);
+      setProviders(formattedProviders);
+    };
+
+    fetchData();
+  }, [totalCost]);
 
   const handleProviderSelection = (id: number) => {
     setSelectedProvider(id);
-    setProviderDetails(null); // Reset provider details when selecting a new provider
+    setProviderDetails(null);
   };
 
   const handleMoreInfo = (fullExplanation: string) => {
-    setProviderDetails(fullExplanation); // Show details when More Info is clicked
+    setProviderDetails(fullExplanation);
+    console.log(fullExplanation);
   };
   const handleGetCardDetails = async () => {
     if (selectedProvider !== null) {
@@ -105,11 +137,13 @@ const BNPLRanking = () => {
               className={styles.providerLabel}
             >
               <h4 className={styles.providerName}>{provider.name}</h4>
-              <p className={styles.providerSummary}>{provider.summary}</p>
+              <p className={styles.providerSummary}>
+                {provider.highlightSummary}
+              </p>
             </label>
             <button
               className={styles.moreInfoButton}
-              onClick={() => handleMoreInfo(provider.fullExplanation)}
+              onClick={() => handleMoreInfo(provider.fullDescription)}
             >
               More Info
             </button>

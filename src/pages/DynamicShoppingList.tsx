@@ -104,7 +104,7 @@ const DynamicShoppingList: React.FC = () => {
 
       <h3 className={styles.total}>Total: ${totalCost.toFixed(2)}</h3>
 
-      <Link to="/bnpl">
+      <Link to="/bnpl" state={{ totalCost }}>
         <button onClick={handleCheckout} className={styles.checkoutButton}>
           🚀 Proceed to BNPL Analyzer
         </button>

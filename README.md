@@ -1,50 +1,82 @@
-# React + TypeScript + Vite
+# SmartPay Browser Extension Setup Instructions
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Prerequisites
+- Node.js (v16+ recommended)
+- npm (comes with Node.js)
+- Google Chrome browser
 
-Currently, two official plugins are available:
+## Setup Steps
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. **Unzip the project archive**
+```bash
+unzip smartpay-frontend.zip
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. **Navigate to the frontend directory**
+```bash
+cd frontend
 ```
+
+3. **Install project dependencies**
+```bash
+npm install
+```
+
+---
+
+## Running the Extension Locally (Development Mode)
+
+1. **Start the development server**
+```bash
+npm run dev
+```
+
+2. **Access the development server**
+- The server will be hosted at:
+```
+http://localhost:5173
+```
+- The root of the project is available at:
+```
+http://localhost:5173/#/
+```
+
+---
+
+## Building and Loading the Extension in Chrome
+
+1. **Build the project**
+```bash
+npm run build
+```
+
+2. **Open Chrome Extensions page**
+- Navigate to:
+```
+chrome://extensions/
+```
+
+3. **Enable Developer Mode**
+- Toggle the "Developer mode" switch in the top-right corner.
+
+4. **Load the unpacked extension**
+- Click on "Load unpacked."
+- Select the `dist/` directory created by the build process.
+
+5. **Verify Backend Availability**
+- Make sure the backend server is running locally at:
+```
+http://localhost:8000
+```
+
+6. **Test the Extension**
+- Click on the SmartPay extension icon in the browser to view the popup.
+
+---
+
+## Troubleshooting
+- If the extension does not load correctly, ensure all previous versions are removed.
+- Check the browser console for errors (Right-click -> Inspect -> Console).
+
+For further assistance, please contact the project team.
+

@@ -1,10 +1,18 @@
 {
-    "manifest_version": 3,
-    "name": "Smart Pay",
-    "version": "1.0.0",
-    "action": {
-        "default_popup": "index.html"
-    },
+  "manifest_version": 3,
+  "name": "Smart Pay",
+  "version": "1.0.0",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "36x36logo.png",
+      "32": "36x36logo.png",
+      "48": "36x36logo.png"
+    }
+  },
+  "icons": {
+    "36": "36x36logo.png"
+  },
     "permissions": [
     "storage"
   ],

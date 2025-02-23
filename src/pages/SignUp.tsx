@@ -86,11 +86,16 @@ const SignUp: React.FC = () => {
     }
   };
 
-
-
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
+        <img
+          src="/money.png"
+          alt="Logo"
+          height={100}
+          width={100}
+          className={styles.logo} // Create this class in your CSS for styling
+        />
         <h2 className={styles.heading}>Create your Account</h2>
 
         <div>

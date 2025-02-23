@@ -18,6 +18,10 @@
     max-width: 20rem;
 }
 
+.logo {
+    align-self: center;
+}
+
 .heading {
     font-size: 1.25rem;
     font-weight: bold;

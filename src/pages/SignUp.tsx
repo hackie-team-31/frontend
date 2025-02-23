@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styles from "../styles/SignUp.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<{
     name: string;
     email: string;
@@ -45,11 +46,47 @@ const SignUp: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic
-    console.log(formData);
+
+    // Prepare the request payload based on the expected API format
+    const requestBody = {
+      email: formData.email,
+      password: formData.password,
+      name: formData.name,
+      mobile: formData.mobile,
+      dob: formData.dob,
+      address: `${formData.addressLine1}, ${formData.addressLine2}, ${formData.country}`,
+      job_title: formData.jobPosition,
+      monthly_income: parseFloat(formData.income),
+      monthly_expenses: 0.0, // Assuming a default or calculated value for now
+    };
+
+    try {
+      const response = await fetch("http://localhost:8000/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Registration Successful:", result);
+        navigate("/cart");
+      } else {
+        const error = await response.json();
+        console.error("Registration Failed:", error);
+        alert("Registration failed: " + (error.detail || "Please try again."));
+      }
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      alert("An error occurred. Please try again later.");
+    }
   };
+
+
 
   return (
     <div className={styles.container}>

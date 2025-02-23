@@ -51,7 +51,7 @@
     /* Gold */
     background-color: #fff8e1;
     /* Light Yellow */
-    
+
     /* Strong shadow */
     font-weight: bold;
     /* Make text bold for Rank 1 */
@@ -129,7 +129,7 @@
     width: 80%;
     max-width: 400px;
     /* Reduced width for compact design */
-    text-align: center;
+    text-align: left;
 }
 
 .closePopupButton {
@@ -147,6 +147,7 @@
     background-color: #0f766e;
     /* Darker Teal */
 }
+
 .selected {
     box-shadow: 0 4px 8px rgba(20, 184, 166, 0.2);
     /* Subtle shadow for emphasis */
@@ -192,4 +193,30 @@
     color: #9ca3af;
     /* Darker Grey for text */
     cursor: not-allowed;
+}
+
+.spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
